@@ -1,0 +1,26 @@
+{
+  "name": "knight_travails",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --watch",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jw287962/knight_travails.git"
+  },
+  "author": "Jason Wong <jason.wongdevwork@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jw287962/knight_travails/issues"
+  },
+  "homepage": "https://github.com/jw287962/knight_travails#readme",
+  "devDependencies": {
+    "html-webpack-plugin": "^5.5.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  }
+}
