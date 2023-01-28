@@ -1,24 +1,53 @@
 import node from './node.js';
 
 
-function allMoves(position = node(),x = 0,y = 0){
+function allMoves(position = node(),x = 0,y = 0,counter =  0){
+  
       position.value = [x,y];
       if(position.value[0] > 7 || position.value[1]> 7 || position.value[0] <0 || position.value[1]<0){
         return null;
       }
-      if(position == null){
-        return ;
-      }
+  
+      // if(position.previousPosition.length > 10) return null;
 
-      console.log(position.value);
-    position.leftdown = node([position.value[0]-2,position.value[1]-1]);
-    position.leftup   = node([position.value[0]-2,position.value[1]+1]);
-    position.upleft = node([position.value[0]-1,position.value[1]+2]);
-    position.upright = node([position.value[0]+1,position.value[1]+2]);
-    position.rightdown = node([position.value[0]+2,position.value[1]-1]);
-    position.rightup = node([position.value[0]+2,position.value[1]+1]);
-    position.downleft = node([position.value[0]-1,position.value[1]-2]);
-    position.downright = node([position.value[0]+1,position.value[1]-2]);
+      // if(!visitedLeftDown)
+      position.leftdown = node([position.value[0]-2,position.value[1]-1],position.previousPosition);
+      // if(!visitedLeftUp)
+      position.leftup   = node([position.value[0]-2,position.value[1]+1],position.previousPosition);
+      // if(!visitedUpleft)
+      position.upleft = node([position.value[0]-1,position.value[1]+2],position.previousPosition);
+      // if(!visitedUpRight)
+      position.upright = node([position.value[0]+1,position.value[1]+2],position.previousPosition);
+      // if(!visitedRightDown)
+      position.rightdown = node([position.value[0]+2,position.value[1]-1],position.previousPosition);
+      // if(!visitedRightUp)
+      position.rightup = node([position.value[0]+2,position.value[1]+1],position.previousPosition);
+      // if(!visitedDownLeft)
+      position.downleft = node([position.value[0]-1,position.value[1]-2],position.previousPosition);
+      // if(!visitedDownRight)
+      position.downright = node([position.value[0]+1,position.value[1]-2],position.previousPosition);
+
+
+      if(!(position.leftdown || position.leftup||position.upright || position.upleft || position.rightdown
+         || position.rightup || position.downleft || position.downright)) return null;
+
+      if(position.leftdown != null)
+    allMoves(position.leftdown,position.leftdown.value[0],position.leftdown.value[1],counter+=1);
+    
+    if(position.leftup != null)
+   allMoves(position.leftup,position.leftup.value[0],position.leftup.value[1],counter+=1);
+    if(position.upleft != null)
+  allMoves(position.upleft,position.upleft.value[0],position.upleft.value[1],counter+=1);
+    if(position.upright != null)
+  allMoves(position.upright,position.upright.value[0],position.upright.value[1],counter+=1);
+    if(position.rightdown != null)
+  allMoves(position.rightdown,position.rightdown.value[0],position.rightdown.value[1],counter+=1);
+    if(position.rightup != null)
+  allMoves(position.rightup,position.rightup.value[0],position.rightup.value[1],counter+=1);
+    if(position.downleft != null)
+   allMoves(position.downleft,position.downleft.value[0],position.downleft.value[1],counter+=1);
+    if(position.downright != null)
+    allMoves(position.downright,position.downright.value[0],position.downright.value[1],counter+=1);
 
 return position;
 }
@@ -26,31 +55,18 @@ return position;
 function getRoot(){
   return root;
 }
+let root;
 
 function knightMoves(start,endPosition){
-  let moves = allMoves(undefined,start[0],start[1]);
-
+  let firstMove = node(start);
+  console.log(firstMove);
+  let moves = allMoves(firstMove,start[0],start[0]);
+let root = firstMove;
+  console.log(moves);
   // while(endPosition[0] != moves.value[0] || endPosition[1] != moves.value[1]){
-for(let i = 0 ; i <= 10; i++){
-      if(moves.leftdown != null)
-      moves = allMoves(moves.leftdown,moves.leftdown.value[0],moves.leftdown.value[1]);
-      if(moves.leftup != null)
-      moves = allMoves(moves.leftup,moves.leftup.value[0],moves.leftup.value[1]);
-      if(moves.upleft != null)
-      moves = allMoves(moves.upleft,moves.upleft.value[0],moves.upleft.value[1]);
-      if(moves.upright != null)
-      moves = allMoves(moves.upright,moves.upright.value[0],moves.upright.value[1]);
-      if(moves.rightdown != null)
-      moves = allMoves(moves.rightdown,moves.rightdown.value[0],moves.rightdown.value[1]);
-      if(moves.rightup != null)
-      moves = allMoves(moves.rightup,moves.rightup.value[0],moves.rightup.value[1]);
-      if(moves.downleft != null)
-      moves = allMoves(moves.downleft,moves.downleft.value[0],moves.downleft.value[1]);
-      if(moves.downright != null)
-      moves = allMoves(moves.downright,moves.downright.value[0],moves.downright.value[1]);
 
-  }
 
 }
+
 
 export {allMoves, knightMoves,getRoot};
