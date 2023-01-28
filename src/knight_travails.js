@@ -4,11 +4,11 @@ import node from './node.js';
 function allMoves(position = node(),x = 0,y = 0,counter =  0){
   
       position.value = [x,y];
-      if(position.value[0] > 7 || position.value[1]> 7 || position.value[0] <0 || position.value[1]<0){
-        return null;
-      }
-  
-      // if(position.previousPosition.length > 10) return null;
+      // if(position.value[0] > 7 || position.value[1]> 7 || position.value[0] <0 || position.value[1]<0){
+      //   return null;
+      // }
+      
+      if(position.previousPosition.length > 10) return null;
 
       // if(!visitedLeftDown)
       position.leftdown = node([position.value[0]-2,position.value[1]-1],position.previousPosition);
@@ -29,7 +29,7 @@ function allMoves(position = node(),x = 0,y = 0,counter =  0){
 
 
       if(!(position.leftdown || position.leftup||position.upright || position.upleft || position.rightdown
-         || position.rightup || position.downleft || position.downright)) return null;
+        || position.rightup || position.downleft || position.downright)) return null;
 
       if(position.leftdown != null)
     allMoves(position.leftdown,position.leftdown.value[0],position.leftdown.value[1],counter+=1);
@@ -57,6 +57,51 @@ function getRoot(){
 }
 let root;
 
+function levelOrder(node = root,endPosition){
+  let queueArray = [];
+    if(node == null) return [];
+    let orderArray = [];
+    queueArray.push(node);
+
+    while(queueArray.length != 0){
+       let sliced = queueArray.splice(0,1);
+      //  if(callback)
+      //   orderArray.push(callback(sliced[0].data));
+      //  else
+      //   orderArray.push(sliced[0].data);
+      let currentPosition = sliced[0].value;
+      if(currentPosition[0] ==  endPosition[0] && currentPosition[1] == endPosition[1])
+      return  sliced[0].previousPosition;
+
+
+      if(sliced[0].leftdown != null){
+        queueArray.push(sliced[0].leftdown); 
+      }
+      if(sliced[0].leftup != null){
+    queueArray.push(sliced[0].leftup);
+      }
+       if(sliced[0].upleft != null){
+    queueArray.push(sliced[0].upleft);
+      }
+      if(sliced[0].upright != null){
+    queueArray.push(sliced[0].upright);
+      }
+      if(sliced[0].rightdown != null){
+    queueArray.push(sliced[0].rightdown);
+      }
+      if(sliced[0].rightup != null){
+    queueArray.push(sliced[0].rightup);
+      }
+      if(sliced[0].downleft != null){
+    queueArray.push(sliced[0].downleft);
+      }
+      if(sliced[0].downright != null){
+    queueArray.push(sliced[0].downright);
+      }
+      
+    }
+ 
+}
 function knightMoves(start,endPosition){
   let firstMove = node(start);
   console.log(firstMove);
@@ -64,9 +109,15 @@ function knightMoves(start,endPosition){
 let root = firstMove;
   console.log(moves);
   // while(endPosition[0] != moves.value[0] || endPosition[1] != moves.value[1]){
+    let array = levelOrder(firstMove,endPosition);
+    console.log(array);
 
+    array.forEach(element => {
+      console.log(element);
+    });
 
 }
+
 
 
 export {allMoves, knightMoves,getRoot};
