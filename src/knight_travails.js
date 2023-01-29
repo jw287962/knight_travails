@@ -8,7 +8,7 @@ function allMoves(position = node(),x = 0,y = 0,counter =  0){
       //   return null;
       // }
       
-      if(position.previousPosition.length > 10) return null;
+      if(position.previousPosition.length > 8) return null;
 
       // if(!visitedLeftDown)
       position.leftdown = node([position.value[0]-2,position.value[1]-1],position.previousPosition);

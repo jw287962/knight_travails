@@ -12,11 +12,16 @@ form.addEventListener('submit',calculateMoves);
 
 function calculateMoves(e){
   e.preventDefault();
+  const output = document.querySelector(".route");
+  output.textContent = 'loading';
+  let splitter = '';
   const startPosition = document.querySelector(".startpos");
   const endPosition = document.querySelector(".endpos");
-  const startPosArray = (startPosition.value).split(',').map(x => x*1 );
-  const endPosArray =  (endPosition.value).split(',').map(x => x*1 );
-console.log(startPosArray);
+  if(startPosition.value.includes(',')){
+    splitter = ','
+  }
+  const startPosArray = (startPosition.value).split(splitter).map(x => x*1 );
+  const endPosArray =  (endPosition.value).split(splitter).map(x => x*1 );
   let array  = knightMoves(startPosArray,endPosArray)
 updateHTML(array);
 
@@ -26,8 +31,12 @@ updateHTML(array);
 function updateHTML(array){
   
   const output = document.querySelector(".route");
+  output.textContent = '';
+  let i = 0;
 
   array.forEach(element => {
-    output.textContent += `(${element}) --> `;
+    i++;
+    output.textContent += `Move ${i}: [${element}] \r\n`;
+
   });
 }
