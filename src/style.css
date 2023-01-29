@@ -1,0 +1,35 @@
+
+@font-face {
+  font-family: RobotoRegular;
+  src: url("./asset/Roboto-Regular.ttf");
+}
+@font-face {
+  font-family: RobotoBold;
+  src: url("./asset/Roboto-Bold.ttf");
+}
+body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family:  RobotoRegular, Arial, Helvetica, sans-serif;
+}
+
+.header{
+  display: flex;
+  justify-content: center;
+  height: 50px;
+  font-family:  RobotoBold, Arial, Helvetica, sans-serif;
+  font-size: larger;
+  width: 100vw;
+  border-bottom: 2px solid grey;
+}
+.input{
+  display: flex;
+  flex-direction: column;
+}
+
+
+form,fieldset{
+  display: flex;
+  flex-direction: column;
+}

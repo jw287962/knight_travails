@@ -103,19 +103,19 @@ function levelOrder(node = root,endPosition){
  
 }
 function knightMoves(start,endPosition){
+  console.log(start, '-->',endPosition);
   let firstMove = node(start);
-  console.log(firstMove);
   let moves = allMoves(firstMove,start[0],start[0]);
 let root = firstMove;
-  console.log(moves);
   // while(endPosition[0] != moves.value[0] || endPosition[1] != moves.value[1]){
     let array = levelOrder(firstMove,endPosition);
-    console.log(array);
 
     array.forEach(element => {
       console.log(element);
     });
 
+    console.log(moves);
+return array;
 }
 
 
