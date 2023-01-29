@@ -3,7 +3,25 @@
   <head>
     <meta charset="utf-8">
     <title>Output Management</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1"><script defer src="main.js"></script></head>
+  <meta name="viewport" content="width=device-width, initial-scale=1"></script><script defer src="main.js"></script></head>
   <body>
+
+    <div class="header">Knight Travails</div>
+    <div class="input">
+      <form class="formdata">
+        <fieldset>
+      <legend>Input Starting and Ending Position:</legend>
+      <label for="startpos">Starting Position </label>
+      <input type="text" class="startpos" id="startpos" placeholder="0,0" value="0,0" required>
+      <label for="Endpos">Ending Position</label>
+      <input type="text" class="endpos" id="endpos"placeholder="7,7" required>
+      <input type="submit" value="Calculate">
+    </fieldset>
+  </form>
+    </div>
   </body>
+
+  <div class="output">
+    <p class="route"></p>
+  </div>
 </html>
