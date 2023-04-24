@@ -37,8 +37,8 @@ function convertPositionDataString(string, splitter = ",") {
 function clickSetPosition(e) {
   e.preventDefault();
 
-  console.log(positions.startPosString, e.target);
-  if (positions.startPosString === e.target.dataset.position) {
+  console.log(positions.startPosString, e.currentTarget);
+  if (positions.startPosString === e.currentTarget.dataset.position) {
     return;
   }
   const knight = document.createElement("img");
@@ -46,16 +46,20 @@ function clickSetPosition(e) {
   knight.classList.add("move");
 
   const instructions = document.querySelector(".instruction");
-  // console.log(e.target.dataset.position);
+  // console.log(e.currentTarget.dataset.position);
 
   if (positions.startPos.length != 0) {
-    positions.endPos = convertPositionDataString(e.target.dataset.position);
-    e.target.appendChild(knight);
+    positions.endPos = convertPositionDataString(
+      e.currentTarget.dataset.position
+    );
+    e.currentTarget.appendChild(knight);
   } else {
     resetBoard();
-    e.target.appendChild(knight);
-    positions.startPos = convertPositionDataString(e.target.dataset.position);
-    positions.startPosString = e.target.dataset.position;
+    e.currentTarget.appendChild(knight);
+    positions.startPos = convertPositionDataString(
+      e.currentTarget.dataset.position
+    );
+    positions.startPosString = e.currentTarget.dataset.position;
     instructions.textContent = "Choose Ending Position!";
   }
   if (positions.startPos.length && positions.endPos.length) {
