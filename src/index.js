@@ -37,6 +37,8 @@ function clickSetPosition(e) {
   const knight = document.createElement("img");
   knight.classList.add("knightImg");
   knight.classList.add("move");
+
+  const instructions = document.querySelector(".instruction");
   // console.log(e.target.dataset.position);
   e.preventDefault();
   if (positions.startPosString === e.target.dataset.position) {
@@ -51,11 +53,13 @@ function clickSetPosition(e) {
     e.target.appendChild(knight);
     positions.startPos = convertPositionDataString(e.target.dataset.position);
     positions.startPosString = e.target.dataset.position;
+    instructions.textContent = "Choose Ending Position!";
   }
   if (positions.startPos.length && positions.endPos.length) {
     calculateMoves(positions.startPos, positions.endPos);
     positions.startPos = [];
     positions.endPos = [];
+    instructions.textContent = "Choose Starting Position!";
   }
 }
 
