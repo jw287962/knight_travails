@@ -34,6 +34,9 @@ function convertPositionDataString(string, splitter = ",") {
 //
 
 function clickSetPosition(e) {
+  const knight = document.createElement("img");
+  knight.classList.add("knightImg");
+  knight.classList.add("move");
   // console.log(e.target.dataset.position);
   e.preventDefault();
   if (positions.startPosString === e.target.dataset.position) {
@@ -41,11 +44,11 @@ function clickSetPosition(e) {
   }
 
   if (positions.startPos.length != 0) {
-    e.target.classList.add("endPos");
     positions.endPos = convertPositionDataString(e.target.dataset.position);
+    e.target.appendChild(knight);
   } else {
     resetBoard();
-    e.target.classList.add("startPos");
+    e.target.appendChild(knight);
     positions.startPos = convertPositionDataString(e.target.dataset.position);
     positions.startPosString = e.target.dataset.position;
   }
@@ -87,8 +90,13 @@ function updateHTML(array) {
       div.classList.add("moveNumber");
       boardElement.classList.add("move");
 
+      const knight = document.createElement("img");
+      knight.classList.add("knightImg");
+      knight.classList.add("move");
+
       if (i != 1 && i != array.length) {
         div.textContent = i;
+        boardElement.appendChild(knight);
       } else {
         div.textContent = i;
       }
