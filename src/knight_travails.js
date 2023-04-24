@@ -1,5 +1,5 @@
 import node from "./node.js";
-
+// STARTS FROM BOTTON LEFT CORNER 0,0
 function allMoves(position = node(), x = 0, y = 0, counter = 0) {
   position.value = [x, y];
   // if(position.value[0] > 7 || position.value[1]> 7 || position.value[0] <0 || position.value[1]<0){
@@ -176,8 +176,9 @@ function levelOrder(node = root, endPosition) {
 }
 function knightMoves(start, endPosition) {
   console.log(start, "-->", endPosition);
+
   let firstMove = node(start);
-  let moves = allMoves(firstMove, start[0], start[0]);
+  let moves = allMoves(firstMove, start[0], start[1]);
   let root = firstMove;
   // while(endPosition[0] != moves.value[0] || endPosition[1] != moves.value[1]){
   let array = levelOrder(firstMove, endPosition);

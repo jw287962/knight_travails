@@ -5,24 +5,44 @@ import "./style.css";
 makeBoard();
 let form = document.querySelector(".formdata");
 const positions = { startPos: [], endPos: [] };
-form.addEventListener("submit", getPositions);
+// form.addEventListener("submit", getPositions);
 
-function calculateMoves(startPosArray, endPosArray) {
-  let array = knightMoves(startPosArray, endPosArray);
-  updateHTML(array);
+// and add EVENTLISTENER
+function makeBoard() {
+  const board = document.querySelector(".board");
+
+  for (let i = 7; i >= 0; i--) {
+    const rowDiv = document.createElement("div");
+    rowDiv.classList.add("boardRow");
+    board.appendChild(rowDiv);
+    // array.push([]);
+    for (let j = 0; j <= 7; j++) {
+      const boardPos = document.createElement("button");
+      boardPos.classList.add("boardElement");
+      boardPos.addEventListener("click", clickSetPosition);
+
+      boardPos.dataset.position = [j, i];
+      // array[i].push[j];
+      rowDiv.appendChild(boardPos);
+    }
+  }
+  // return array;
 }
-
 function convertPositionDataString(string, splitter = ",") {
   return string.split(splitter).map((x) => x * 1);
 }
 //
 
-function setPosition(e) {
+function clickSetPosition(e) {
   // console.log(e.target.dataset.position);
   e.preventDefault();
+
   if (positions.startPos.length != 0) {
+    e.target.classList.add("endPos");
     positions.endPos = convertPositionDataString(e.target.dataset.position);
   } else {
+    resetBoard();
+    e.target.classList.add("startPos");
     positions.startPos = convertPositionDataString(e.target.dataset.position);
   }
   if (positions.startPos.length && positions.endPos.length) {
@@ -32,26 +52,20 @@ function setPosition(e) {
   }
 }
 
-// and add EVENTLISTENER
-function makeBoard() {
-  const board = document.querySelector(".board");
+function resetBoard() {
+  const boardElements = document.querySelectorAll(".boardElement");
 
-  for (let i = 0; i <= 7; i++) {
-    const rowDiv = document.createElement("div");
-    rowDiv.classList.add("boardRow");
-    board.appendChild(rowDiv);
-    // array.push([]);
-    for (let j = 0; j <= 7; j++) {
-      const boardPos = document.createElement("button");
-      boardPos.classList.add("boardElement");
-      boardPos.addEventListener("click", setPosition);
+  boardElements.forEach((ele) => {
+    const style = ["endPos", "startPos", "move"];
+    ele.classList.remove(...style);
+    ele.textContent = "";
+    // ele.className.add("boardElement");
+  });
+}
 
-      boardPos.dataset.position = [i, j];
-      // array[i].push[j];
-      rowDiv.appendChild(boardPos);
-    }
-  }
-  // return array;
+function calculateMoves(startPosArray, endPosArray) {
+  let array = knightMoves(startPosArray, endPosArray);
+  updateHTML(array);
 }
 
 function updateHTML(array) {
@@ -63,6 +77,22 @@ function updateHTML(array) {
     array.forEach((element) => {
       i++;
       output.textContent += `Move ${i}: [${element}] \r\n`;
+
+      const boardElement = document.querySelector(
+        `[data-position="${element}"]`
+      );
+      console.log(i);
+      console.log(array.length);
+      const div = document.createElement("div");
+      div.classList.add("moveNumber");
+      boardElement.classList.add("move");
+
+      if (i != 1 && i != array.length) {
+        div.textContent = i;
+      } else {
+        div.textContent = i;
+      }
+      boardElement.appendChild(div);
     })
   );
 }

@@ -67,10 +67,28 @@ input[type="submit"] {
   align-items: center;
 }
 .boardRow {
+  height: var(--boxSize);
+  display: flex;
 }
 .boardElement {
   height: var(--boxSize);
   width: var(--boxSize);
   background-color: white;
   border: 1px solid black;
+}
+
+.startPos {
+  background-color: green;
+}
+
+.endPos {
+  background-color: red;
+}
+
+.move {
+  background-color: grey;
+}
+
+.moveNumber {
+  position: relative;
 }
