@@ -7,6 +7,7 @@ let form = document.querySelector(".formdata");
 const positions = { startPos: [], endPos: [], startPosString: "" };
 // form.addEventListener("submit", getPositions);
 
+const information = document.querySelector(".information");
 // and add EVENTLISTENER
 function makeBoard() {
   const board = document.querySelector(".board");
@@ -19,7 +20,7 @@ function makeBoard() {
     for (let j = 0; j <= 7; j++) {
       const boardPos = document.createElement("button");
       boardPos.classList.add("boardElement");
-      boardPos.addEventListener("click", clickSetPosition);
+      boardPos.addEventListener("click", clickSetPosition, true);
 
       boardPos.dataset.position = [j, i];
       // array[i].push[j];
@@ -34,16 +35,18 @@ function convertPositionDataString(string, splitter = ",") {
 //
 
 function clickSetPosition(e) {
+  e.preventDefault();
+
+  console.log(positions.startPosString, e.target);
+  if (positions.startPosString === e.target.dataset.position) {
+    return;
+  }
   const knight = document.createElement("img");
   knight.classList.add("knightImg");
   knight.classList.add("move");
 
   const instructions = document.querySelector(".instruction");
   // console.log(e.target.dataset.position);
-  e.preventDefault();
-  if (positions.startPosString === e.target.dataset.position) {
-    return;
-  }
 
   if (positions.startPos.length != 0) {
     positions.endPos = convertPositionDataString(e.target.dataset.position);
