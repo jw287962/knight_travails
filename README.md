@@ -1,7 +1,14 @@
-# knight_travails
+## knight_travails
 
-it solve the problem and finds the shortest path to an end position
+Demonstrates an understanding of tree data structures, and finds the shortest path from two positions through a level order approach, stopping at the first occurence of the final position.
+This ultimately shows the shortest possible way to get from one square to another by outputting all squares the knight will stop on along the way.
 
+The tree structure only calculate all possible combinations to 7 moves, which allows a user to go from any position to another position.
 
-it only calculate up to all possible moves in under 8 moves. 
-(8 moves is relatively quick and covers almost all positions... i didn't check every spot, but i can't seem to find one it can't do it)
+## Board
+
+-- Position starts from bottom left at (0,0), and assumes an (x,y) coordinate system where they represent the horizontal and vertical axis, respectively.
+
+## Guide
+
+Click any position to set the start position, and click another position to choose the end position. That is it!
