@@ -4,7 +4,7 @@ import "./style.css";
 // let root = allMoves();
 makeBoard();
 let form = document.querySelector(".formdata");
-const positions = { startPos: [], endPos: [] };
+const positions = { startPos: [], endPos: [], startPosString: "" };
 // form.addEventListener("submit", getPositions);
 
 // and add EVENTLISTENER
@@ -36,6 +36,9 @@ function convertPositionDataString(string, splitter = ",") {
 function clickSetPosition(e) {
   // console.log(e.target.dataset.position);
   e.preventDefault();
+  if (positions.startPosString === e.target.dataset.position) {
+    return;
+  }
 
   if (positions.startPos.length != 0) {
     e.target.classList.add("endPos");
@@ -44,6 +47,7 @@ function clickSetPosition(e) {
     resetBoard();
     e.target.classList.add("startPos");
     positions.startPos = convertPositionDataString(e.target.dataset.position);
+    positions.startPosString = e.target.dataset.position;
   }
   if (positions.startPos.length && positions.endPos.length) {
     calculateMoves(positions.startPos, positions.endPos);
@@ -69,20 +73,16 @@ function calculateMoves(startPosArray, endPosArray) {
 }
 
 function updateHTML(array) {
-  const output = document.querySelector(".route");
-  output.textContent = "";
   let i = 0;
 
   console.log(
     array.forEach((element) => {
       i++;
-      output.textContent += `Move ${i}: [${element}] \r\n`;
 
       const boardElement = document.querySelector(
         `[data-position="${element}"]`
       );
-      console.log(i);
-      console.log(array.length);
+
       const div = document.createElement("div");
       div.classList.add("moveNumber");
       boardElement.classList.add("move");
