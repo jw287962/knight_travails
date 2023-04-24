@@ -77,17 +77,15 @@ input[type="submit"] {
   background-color: white;
   border: 1px solid black;
 }
-
+.move {
+  background-color: lightgrey;
+}
 .startPos {
   background-color: green;
 }
 
 .endPos {
   background-color: red;
-}
-
-.move {
-  background-color: grey;
 }
 
 .moveNumber {
