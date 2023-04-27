@@ -17,7 +17,6 @@ function makeBoard() {
       const boardPos = document.createElement("button");
       boardPos.classList.add("boardElement");
       boardPos.addEventListener("click", setKnightPosition, true);
-
       boardPos.dataset.position = [j, i];
       rowDiv.appendChild(boardPos);
     }
@@ -58,8 +57,8 @@ function setKnightPosition(e) {
   if (positions.startPos.length && positions.endPos.length) {
     updateHTML(calculateMoves(positions.startPos, positions.endPos));
     positions.startPos = [];
-    positions.startPosString = "";
     positions.endPos = [];
+    positions.startPosString = "";
     instructions.textContent = "Choose Starting Position!";
   }
 }
